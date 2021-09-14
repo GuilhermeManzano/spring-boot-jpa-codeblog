@@ -4,8 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,34 +14,44 @@ import com.spring.codeblog.repository.CodedBlogRepository;
 
 @Component
 public class DummyData {
-	
-	@Autowired
-	CodedBlogRepository codedBlogRepository;
+	private static final Logger LOGGER = LoggerFactory.getLogger(DummyData.class);
+	private static final String TEXTO = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has "
+			+ "been the industry's standard dummy text ever since the 1500s, when an unknown printer took a"
+			+ " galley of type and scrambled it to make a type specimen book. It has survived not only five "
+			+ "centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It "
+			+ "was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, "
+			+ "and more recently with desktop publishing software like Aldus PageMaker including versions of "
+			+ "Lorem Ipsum.";
 
-	//@PostConstruct
+	@Autowired
+	private CodedBlogRepository codedBlogRepository;
+
 	public void savePosts() {
+		String nomeAutor = "Denis Machado";
+		String titulo = "API REST";
+		Post post1 = persisteDadosPost(nomeAutor, titulo);
+
+		nomeAutor = "Michelli Brito";
+		titulo = "API REST";
+		Post post2 = persisteDadosPost(nomeAutor, titulo);
 
 		List<Post> postList = new ArrayList<>();
-		Post post1 = new Post();
-		post1.setAutor("Bruno Alexandre");
-		post1.setData(LocalDate.now());
-		post1.setTitulo("Docker");
-		post1.setTexto(
-				"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.");
-
-		Post post2 = new Post();
-		post2.setAutor("Michelli Brito");
-		post2.setData(LocalDate.now());
-		post2.setTitulo("API REST");
-		post2.setTexto(
-				"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.");
-
 		postList.add(post1);
 		postList.add(post2);
 
-		for (Post post : postList) {
+		postList.forEach(post -> {
 			Post postSaved = codedBlogRepository.save(post);
-			System.out.println(postSaved.getId());
-		}
+			LOGGER.info("Post salvo: {}", postSaved.getId());
+		});
+	}
+
+	private Post persisteDadosPost(String nomeAutor, String titulo) {
+		Post post = new Post();
+		post.setAutor(nomeAutor);
+		post.setData(LocalDate.now());
+		post.setTitulo(titulo);
+		post.setTexto(TEXTO);
+
+		return post;
 	}
 }

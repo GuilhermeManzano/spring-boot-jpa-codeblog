@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org">
+<html xmlns:th="http://thymeleaf.org"
+	lang="en">
 <head>
     <title>MyCodeBlog</title>
     <!--Import Google Icon Font-->
@@ -10,7 +11,7 @@
 <body>
 
     <header>
-        <nav class="navbar navbar-light bg-light">
+        <nav class="navbar navbar-light bg-light" aria-label=""">
             <span class="navbar-brand mb-0 h1" style="font-weight: bold;">MyCodeBlog</span>
             <a href="/newpost" class="btn btn-primary" role="button">Novo Post</a>
         </nav>
@@ -28,10 +29,10 @@
         <article>
             <h1 class="card-title" style="font-weight: bold; margin-bottom: 20px;"><span th:text="${post.titulo}"></span></h1>
             <p class="card-subtitle mb-2 text-muted">
-                <i class="material-icons">person_outline</i>
+                <em class="material-icons">person_outline</em>
                 <span th:text="${post.autor}"></span>
                 <br>
-                <i class="material-icons">date_range</i>
+                <em class="material-icons">date_range</em>
                 <span th:text="${post.data}"></span>
             </p>
             <section>

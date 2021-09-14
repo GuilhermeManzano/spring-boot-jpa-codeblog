@@ -8,9 +8,9 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -21,9 +21,9 @@ import com.spring.codeblog.service.CodeBlogService;
 public class CodingBlogController {
 	
 	@Autowired
-	CodeBlogService codeblogService;
+	private CodeBlogService codeblogService;
 	
-	@RequestMapping(value="/posts", method=RequestMethod.GET)
+	@GetMapping(value="/posts")
 	public ModelAndView getPosts() {
 		ModelAndView mv = new ModelAndView("posts");
 		List<Post> posts = codeblogService.findAll();
@@ -32,7 +32,7 @@ public class CodingBlogController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/posts/{id}", method=RequestMethod.GET)
+	@GetMapping(value="/posts/{id}")
 	public ModelAndView getPostsDetails(@PathVariable("id") long id) {
 		ModelAndView mv = new ModelAndView("postDetails");
 		Post post = codeblogService.findById(id);
@@ -41,12 +41,12 @@ public class CodingBlogController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/newpost", method=RequestMethod.GET)
+	@GetMapping(value="/newpost")
 	public String getPostForm() {
 		return "postForm";
 	}
 	
-	@RequestMapping(value="/newpost", method=RequestMethod.POST)
+	@PostMapping(value="/newpost")
 	public String savePost(@Valid Post post, BindingResult result, RedirectAttributes attributes) {
 		if(result.hasErrors()) {
 			attributes.addFlashAttribute("mensagem", "verifique se os campos obrigatórios foram preenchidos");

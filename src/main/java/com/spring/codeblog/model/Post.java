@@ -72,6 +72,10 @@ public class Post {
 	public void setTexto(String texto) {
 		this.texto = texto;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Post [id=" + id + ", titulo=" + titulo + ", autor=" + autor + ", data=" + data + ", texto=" + texto
+				+ "]";
+	}	
 }

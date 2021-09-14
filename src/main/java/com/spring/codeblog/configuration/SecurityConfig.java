@@ -12,30 +12,21 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private static final String[] AUTH_LIST = {
-        "/",
-        "/posts",
-        "/posts/{id}"
-    };
+	private static final String[] AUTH_LIST = { "/", "/posts", "/posts/{id}" };
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception{
-        http.csrf().disable().authorizeRequests()
-                .antMatchers(AUTH_LIST).permitAll()
-                .anyRequest().authenticated()
-                .and().formLogin().permitAll()
-                .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
-    }
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.csrf().disable().authorizeRequests().antMatchers(AUTH_LIST).permitAll().anyRequest().authenticated().and()
+				.formLogin().permitAll().and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
+	}
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception{
-        auth.inMemoryAuthentication()
-                .withUser("michelli").password("{noop}123").roles("ADMIN");
-    }
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.inMemoryAuthentication().withUser("michelli").password("{noop}123").roles("ADMIN");
+	}
 
-    @Override
-    public void configure(WebSecurity web) throws Exception{
-        web.ignoring().antMatchers("/bootstrap/**");
-//        web.ignoring().antMatchers("/bootstrap/**", "/style/**");
-    }
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		web.ignoring().antMatchers("/bootstrap/**");
+	}
 }

@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org">
+<html xmlns:th="http://thymeleaf.org"
+	lang="en">
+
 <head>
 <title>MyCodeBlog</title>
 <!--Import Google Icon Font-->
@@ -10,7 +12,6 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
-<!--<link rel="stylesheet" href="style/styleCss.css"/>-->
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script
@@ -26,7 +27,7 @@
 <body>
 
 	<header>
-		<nav class="navbar navbar-light bg-light">
+		<nav class="navbar navbar-light bg-light" aria-label="">
 			<span class="navbar-brand mb-0 h1" style="font-weight: bold;">MyCodeBlog</span>
 		</nav>
 	</header>
@@ -46,7 +47,7 @@
 				<form method="post">
 					<div class="form-group">
 						<input type="text" class="form-control" name="titulo"
-							placeholder="Título *">
+							placeholder="Tï¿½tulo *">
 					</div>
 					<div class="form-group">
 						<input type="text" class="form-control" name="autor"
@@ -56,13 +57,12 @@
 					<textarea id="summernote" type="text" class="form-control"
 						name="texto" placeholder="Texto *"></textarea>
 
-					<small class="form-text text-muted">(*) Campos obrigatórios</small>
+					<small class="form-text text-muted">(*) Campos obrigatï¿½rios</small>
 
 					<button type="submit" class="btn btn-primary"
 						style="margin-top: 10px;">Publicar</button>
 					<a href="/posts" class="btn btn-light" role="button"
 						style="margin-top: 10px;">Cancelar</a>
-					<!--<button type="submit" class="btn" style="margin-top: 10px;">Cancelar</button>-->
 				</form>
 			</div>
 		</div>
